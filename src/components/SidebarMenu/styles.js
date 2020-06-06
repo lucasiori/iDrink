@@ -10,6 +10,7 @@ export const Container = styled.aside`
   align-items: center;
   background: ${colors.backgroundColor};
   border-right: 5px solid ${colors.primaryColor};
+  box-shadow: 5px 0 20px -2px rgba(0, 0, 0, 0.3);
   padding: 30px 15px;
 `;
 

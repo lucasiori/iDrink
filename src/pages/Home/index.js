@@ -5,9 +5,10 @@ import SidebarMenu from '../../components/SidebarMenu';
 import InputFilterGroup from '../../components/InputFilterGroup';
 import AlcoholicFilterGroup from '../../components/AlcoholicFilterGroup';
 import GlassFilterGroup from '../../components/GlassFilterGroup';
+import DrinkCard from '../../components/DrinkCard';
 
 import colors from '../../utils/colors';
-import { Wrapper, Container, Filters, FiltersTitle } from './styles';
+import { Wrapper, Container, Filters, FiltersTitle, Drinks } from './styles';
 
 function Home() {
   const [expandedFilters, setExpandedFilters] = useState(true);
@@ -39,6 +40,25 @@ function Home() {
             <GlassFilterGroup />
           </section>
         </Filters>
+
+        <Drinks>
+          <h4>change your drink</h4>
+
+          <ul>
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+            <DrinkCard />
+          </ul>
+        </Drinks>
       </Container>
     </Wrapper>
   );

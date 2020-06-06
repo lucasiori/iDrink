@@ -9,11 +9,13 @@ export const Wrapper = styled.main`
 `;
 
 export const Container = styled.section`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   flex: 1;
   align-items: stretch;
   padding: 30px;
+  overflow: auto;
 
   header {
     position: relative;
@@ -47,14 +49,12 @@ export const Filters = styled.section`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  border: 2px solid #8cc7f1;
-  border-radius: 4px;
-  padding: 0 25px;
+  border-top: 2px solid #8cc7f1;
   margin-top: 30px;
 
   section {
     max-height: 1000px;
-    padding: 20px 0;
+    padding: 30px 0 20px;
     overflow: hidden;
     transition: all 300ms, padding 300ms;
 
@@ -68,8 +68,9 @@ export const FiltersTitle = styled.a`
   position: absolute;
   width: max-content;
   background: #fff;
-  padding: 0 10px;
-  top: -15px;
+  padding-right: 10px;
+  top: calc(0% - 14px);
+  left: 0;
 
   ${(props) =>
     !props.expanded &&
@@ -90,8 +91,8 @@ export const FiltersTitle = styled.a`
     flex-direction: row;
     align-items: center;
     color: ${colors.secondaryColor};
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 400;
     text-transform: lowercase;
     margin: 0;
     cursor: pointer;
@@ -100,5 +101,42 @@ export const FiltersTitle = styled.a`
       margin-left: 5px;
       transition: all 300ms;
     }
+  }
+`;
+
+export const Drinks = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  > h4 {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: stretch;
+    color: ${colors.secondaryColor};
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: lowercase;
+    margin: 0;
+
+    &::after {
+      content: '';
+      display: flex;
+      flex: 1;
+      height: 2px;
+      background: ${colors.primaryColor};
+      margin-left: 10px;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 -15px;
   }
 `;
