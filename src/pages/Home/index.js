@@ -1,9 +1,11 @@
 import React from 'react';
 
+import SidebarMenu from '../../components/SidebarMenu';
+
 // import { Container } from './styles';
 
 function Home() {
-  return <h1>Home</h1>;
+  return <SidebarMenu />;
 }
 
 export default Home;
