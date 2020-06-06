@@ -28,7 +28,9 @@ export const Container = styled.div`
   }
 `;
 
-export const DetailsButton = styled.button`
+export const DetailsButton = styled.button.attrs({
+  type: 'button',
+})`
   width: 100%;
   background: ${colors.primaryColor};
   border: none;

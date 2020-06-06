@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, DetailsButton } from './styles';
 
-function DrinkCard() {
+function DrinkCard({ onDetails }) {
   return (
     <Container>
       <img
@@ -12,9 +13,13 @@ function DrinkCard() {
 
       <span>3-Mile Long Island iced Tea</span>
 
-      <DetailsButton type="button">details</DetailsButton>
+      <DetailsButton onClick={onDetails}>details</DetailsButton>
     </Container>
   );
 }
+
+DrinkCard.propTypes = {
+  onDetails: PropTypes.func.isRequired,
+};
 
 export default DrinkCard;
