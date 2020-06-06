@@ -25,8 +25,9 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, button, input {
+  body, button, input, select {
     font: 15px 'Roboto', sans-serif;
+    color: ${colors.textColor};
   }
 
   a {
@@ -41,12 +42,11 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
-  input {
+  input, select {
     width: 100%;
     height: 45px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    color: ${colors.textColor};
     padding: 5px 10px
   }
 
