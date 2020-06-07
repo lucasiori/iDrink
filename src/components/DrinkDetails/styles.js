@@ -243,6 +243,7 @@ export const DrinkIngredients = styled.section`
       small {
         color: #999;
         font-size: 12px;
+        font-weight: 300;
         margin: 5px 0 0 10px;
       }
     }
