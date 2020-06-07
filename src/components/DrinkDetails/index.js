@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { MdClose } from 'react-icons/md';
+import api from '../../services/api';
 
 import alcoholic from '../../assets/alcoholic.svg';
 import glass from '../../assets/glass.svg';
@@ -11,15 +12,53 @@ import {
   Overlay,
   Container,
   CloseButton,
+  DrinkImage,
   DrinkName,
   DrinkTags,
   DrinkInformations,
   Content,
   DrinkIngredients,
-  DrinkPreparation,
+  DrinkInstructions,
 } from './styles';
 
-function DrinkDetails({ hidden, onClose }) {
+const amountIngredients = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+];
+
+function DrinkDetails({ drink: drink_id, hidden, onClose }) {
+  const [drink, setDrink] = useState({});
+
+  useEffect(() => {
+    async function loadDrink() {
+      const response = await api.get('lookup.php', {
+        params: {
+          i: drink_id,
+        },
+      });
+
+      setDrink(response.data.drinks[0]);
+    }
+
+    if (drink_id) {
+      loadDrink();
+    }
+  }, [drink_id]);
+
   return (
     <Wrapper hidden={hidden}>
       <Overlay hidden={hidden} onClick={onClose} />
@@ -29,16 +68,14 @@ function DrinkDetails({ hidden, onClose }) {
           <MdClose color={colors.primaryColor} size={48} />
         </CloseButton>
 
-        <img
-          src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-          alt="Drink"
-        />
+        <DrinkImage>
+          <img src={drink.strDrinkThumb} alt="Thumbnail" />
+        </DrinkImage>
 
-        <DrinkName>3-Mile Long Island Iced Tea</DrinkName>
+        <DrinkName>{drink.strDrink}</DrinkName>
 
         <DrinkTags>
-          <span>IBA</span>
-          <span>ContemporaryClassic</span>
+          {drink.tags && drink.tags.join(',').map((tag) => <span>{tag}</span>)}
         </DrinkTags>
 
         <DrinkInformations>
@@ -46,14 +83,14 @@ function DrinkDetails({ hidden, onClose }) {
             <i>
               <img src={alcoholic} alt="Alcoholic" width="18" />
             </i>
-            <span>Alcoholic</span>
+            <span>{drink.strAlcoholic}</span>
           </div>
 
           <div>
             <i>
               <img src={glass} alt="Glass" width="18" />
             </i>
-            <span>Cocktail glass</span>
+            <span>{drink.strGlass}</span>
           </div>
         </DrinkInformations>
 
@@ -62,33 +99,28 @@ function DrinkDetails({ hidden, onClose }) {
             <span>ingredients</span>
 
             <ul>
-              <li>
-                <span>Tequila</span>
-                <small>1 1/2 oz</small>
-              </li>
-              <li>
-                <span>Triple sec</span>
-                <small>1/2 oz</small>
-              </li>
-              <li>
-                <span>Lime juice</span>
-                <small>1 oz</small>
-              </li>
-              <li>
-                <span>Salt</span>
-              </li>
+              {amountIngredients.map((index) => {
+                if (drink[`strIngredient${index}`]) {
+                  return (
+                    <li key={drink[`strIngredient${index}`]}>
+                      <span>{drink[`strIngredient${index}`]}</span>
+
+                      {drink[`strMeasure${index}`] && (
+                        <small>{drink[`strMeasure${index}`]}</small>
+                      )}
+                    </li>
+                  );
+                }
+                return null;
+              })}
             </ul>
           </DrinkIngredients>
 
-          <DrinkPreparation>
-            <p>
-              Rub the rim of the glass with the lime slice to make the salt
-              stick to it. Take care to moisten only the outer rim and sprinkle
-              the salt on it. The salt should present to the lips of the imbiber
-              and never mix into the cocktail. Shake the other ingredients with
-              ice, then carefully pour into the glass.
-            </p>
-          </DrinkPreparation>
+          {drink.strInstructions && (
+            <DrinkInstructions>
+              <p>{drink.strInstructions}</p>
+            </DrinkInstructions>
+          )}
         </Content>
       </Container>
     </Wrapper>
@@ -96,8 +128,13 @@ function DrinkDetails({ hidden, onClose }) {
 }
 
 DrinkDetails.propTypes = {
+  drink: PropTypes.string,
   hidden: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+};
+
+DrinkDetails.defaultProps = {
+  drink: null,
 };
 
 export default DrinkDetails;

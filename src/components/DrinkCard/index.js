@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, DetailsButton } from './styles';
+import { Container, DrinkImage, DetailsButton } from './styles';
 
-function DrinkCard({ onDetails }) {
+function DrinkCard({ drink, onDetails }) {
   return (
     <Container>
-      <img
-        src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-        alt="Drink"
-      />
+      <DrinkImage>
+        <img src={drink.strDrinkThumb} alt="Thumbnail" />
+      </DrinkImage>
 
-      <span>3-Mile Long Island iced Tea</span>
+      <span>{drink.strDrink}</span>
 
       <DetailsButton onClick={onDetails}>details</DetailsButton>
     </Container>
@@ -19,6 +18,10 @@ function DrinkCard({ onDetails }) {
 }
 
 DrinkCard.propTypes = {
+  drink: PropTypes.shape({
+    strDrink: PropTypes.string.isRequired,
+    strDrinkThumb: PropTypes.string.isRequired,
+  }).isRequired,
   onDetails: PropTypes.func.isRequired,
 };
 

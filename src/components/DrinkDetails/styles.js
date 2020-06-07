@@ -53,18 +53,26 @@ export const Container = styled.div`
   transition: all 700ms, padding 0s;
 
   &[hidden] {
-    transform: translateX(1000px);
     padding: 0;
     transition: all 700ms, padding 0s 701ms;
   }
 
-  > img {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    border: 5px solid ${colors.primaryColor};
-    border-radius: 50%;
-    left: calc(0% - 80px);
+  @media only screen and (min-width: 769px) {
+    &[hidden] {
+      transform: translateX(1000px);
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    max-width: none;
+    height: 80vh;
+    border: none;
+    padding: 70px 30px 30px;
+    margin-top: auto;
+
+    &[hidden] {
+      transform: translateY(1000px);
+    }
   }
 `;
 
@@ -88,10 +96,45 @@ export const CloseButton = styled.button.attrs({
   }
 `;
 
+export const DrinkImage = styled.div`
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.backgroundColor};
+  border: 5px solid ${colors.primaryColor};
+  border-radius: 50%;
+  left: calc(0% - 80px);
+
+  @media only screen and (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+    top: calc(0% - 60px);
+    left: calc(50% - 60px);
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+    @media only screen and (max-width: 768px) {
+      width: 110px;
+      height: 110px;
+    }
+  }
+`;
+
 export const DrinkName = styled.h3`
   color: ${colors.secondaryColor};
   font-size: 20px;
   margin-top: 60px;
+
+  @media only screen and (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 export const DrinkTags = styled.section`
@@ -206,7 +249,7 @@ export const DrinkIngredients = styled.section`
   }
 `;
 
-export const DrinkPreparation = styled.section`
+export const DrinkInstructions = styled.section`
   position: relative;
   padding-top: 20px;
   margin-top: 20px;
@@ -219,11 +262,15 @@ export const DrinkPreparation = styled.section`
     display: block;
     background: ${colors.primaryColor};
     top: 0;
-    left: calc(0% + 120px);
+    left: calc(50% - 60px);
   }
 
   p {
     line-height: 1.5;
     text-align: justify;
+
+    @media only screen and (max-width: 768px) {
+      text-align: center;
+    }
   }
 `;

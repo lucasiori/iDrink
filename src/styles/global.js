@@ -2,8 +2,28 @@ import { createGlobalStyle } from 'styled-components';
 
 import colors from '../utils/colors';
 
+import gilroyLight from '../assets/fonts/gilroy-light.ttf';
+import gilroyRegular from '../assets/fonts/gilroy-regular.ttf';
+import gilroyBold from '../assets/fonts/gilroy-bold.ttf';
+
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+   @font-face {
+    font-family: 'Gilroy';
+    src: url(${gilroyLight}) format('truetype');
+    font-weight: 300;
+  }
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url(${gilroyRegular}) format('truetype');
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url(${gilroyBold}) format('truetype');
+    font-weight: bold;
+  }
 
   * {
     margin: 0;
@@ -26,7 +46,7 @@ export default createGlobalStyle`
   }
 
   body, button, input, select {
-    font: 15px 'Roboto', sans-serif;
+    font: 15px 'Gilroy', sans-serif;
     color: ${colors.textColor};
   }
 
@@ -48,6 +68,10 @@ export default createGlobalStyle`
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px 10px
+  }
+
+  input:focus {
+    border: 1px solid ${colors.primaryColor};
   }
 
   input::placeholder {

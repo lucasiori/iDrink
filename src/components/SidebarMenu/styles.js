@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import colors from '../../utils/colors';
 
 export const Container = styled.aside`
+  position: relative;
   width: 300px;
   height: 100vh;
   display: flex;
@@ -12,6 +13,50 @@ export const Container = styled.aside`
   border-right: 5px solid ${colors.primaryColor};
   box-shadow: 5px 0 20px -2px rgba(0, 0, 0, 0.3);
   padding: 30px 15px;
+  z-index: 990;
+  transition: all 300ms;
+
+  @media only screen and (max-width: 768px) {
+    position: fixed;
+    transform: translateX(0);
+  }
+
+  @media only screen and (min-width: 376px) and (max-width: 768px) {
+    &[hidden] {
+      transform: translateX(-300px);
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    width: 250px;
+
+    &[hidden] {
+      transform: translateX(-250px);
+    }
+  }
+`;
+
+export const MobileMenuButton = styled.button.attrs({
+  type: 'button',
+})`
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.primaryColor};
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 10px;
+  right: -50px;
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+  }
+
+  @media only screen and (max-width: 375px) {
+    right: -55px;
+  }
 `;
 
 export const Content = styled.section`
@@ -43,7 +88,7 @@ export const Content = styled.section`
       font-size: 20px;
       color: ${colors.secondaryColor};
       text-transform: lowercase;
-      padding: 0 5px;
+      padding: 0 10px;
       margin: 0 auto;
       z-index: 1;
     }

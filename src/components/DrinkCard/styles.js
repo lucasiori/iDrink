@@ -11,20 +11,31 @@ export const Container = styled.div`
   background: linear-gradient(to bottom, ${colors.primaryColor} 40%, #fff 0%);
   border: 2px solid ${colors.primaryColor};
   border-radius: 4px;
+  box-shadow: 5px 7px 7px 0px rgba(0, 0, 0, 0.2);
   padding: 20px 25px;
   margin: 20px 15px;
-
-  img {
-    width: 130px;
-    height: 130px;
-    border: 10px solid ${colors.primaryColor};
-    border-radius: 50%;
-  }
 
   span {
     font-size: 16px;
     margin-top: 20px;
     text-align: center;
+  }
+`;
+
+export const DrinkImage = styled.div`
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.backgroundColor};
+  border: 5px solid ${colors.primaryColor};
+  border-radius: 50%;
+
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
   }
 `;
 
