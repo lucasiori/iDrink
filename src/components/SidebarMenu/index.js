@@ -39,6 +39,7 @@ function SidebarMenu({ onSelect }) {
   }, []);
 
   useEffect(() => {
+    setMobileMenuOpen(false);
     onSelect(selectedCategory);
   }, [selectedCategory, onSelect]);
 

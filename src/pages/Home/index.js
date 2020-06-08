@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AiOutlineReload } from 'react-icons/ai';
 import api from '../../services/api';
 
 import SidebarMenu from '../../components/SidebarMenu';
@@ -6,16 +7,17 @@ import FiltersGroup from '../../components/FiltersGroup';
 import DrinkCard from '../../components/DrinkCard';
 import DrinkDetails from '../../components/DrinkDetails';
 
+import colors from '../../utils/colors';
 import { Wrapper, Container, Filters, Drinks } from './styles';
 
 function Home() {
   const [drinks, setDrinks] = useState([]);
   const [filteredDrinks, setFilteredDrinks] = useState([]);
   const [category, setCategory] = useState(null);
-
   const [filterType, setFilterType] = useState('name');
   const [filterValue, setFilterValue] = useState('');
   const [drinkDetails, setDrinkDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadDriks() {
@@ -27,15 +29,20 @@ function Home() {
 
       setDrinks(response.data.drinks);
       setFilteredDrinks(response.data.drinks);
+      setLoading(false);
     }
 
     if (category) {
-      loadDriks();
+      setLoading(true);
       setFilterValue('');
+
+      loadDriks();
     }
   }, [category]);
 
   async function handleFilter() {
+    setLoading(true);
+
     let response;
 
     if (filterValue) {
@@ -66,6 +73,8 @@ function Home() {
     } else {
       setFilteredDrinks(drinks);
     }
+
+    setLoading(false);
   }
 
   return (
@@ -105,21 +114,29 @@ function Home() {
             </section>
           </Filters>
 
-          <Drinks>
-            <h4>change your drink</h4>
+          {loading ? (
+            <AiOutlineReload
+              className="loading"
+              size={100}
+              color={colors.primaryColor}
+            />
+          ) : (
+            <Drinks>
+              <h4>change your drink</h4>
 
-            <ul>
-              {filteredDrinks.map((drink) => (
-                <DrinkCard
-                  key={String(drink.idDrink)}
-                  drink={drink}
-                  onDetails={() => {
-                    setDrinkDetails(drink.idDrink);
-                  }}
-                />
-              ))}
-            </ul>
-          </Drinks>
+              <ul>
+                {filteredDrinks.map((drink) => (
+                  <DrinkCard
+                    key={String(drink.idDrink)}
+                    drink={drink}
+                    onDetails={() => {
+                      setDrinkDetails(drink.idDrink);
+                    }}
+                  />
+                ))}
+              </ul>
+            </Drinks>
+          )}
         </Container>
       </Wrapper>
     </>

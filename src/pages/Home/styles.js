@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import colors from '../../utils/colors';
 
@@ -6,6 +6,16 @@ export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   justify-content: stretch;
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
 export const Container = styled.section`
@@ -43,6 +53,11 @@ export const Container = styled.section`
       margin: 0 auto;
       z-index: 1;
     }
+  }
+
+  svg.loading {
+    margin: 50px auto 0;
+    animation: ${rotate} 2s linear infinite;
   }
 `;
 

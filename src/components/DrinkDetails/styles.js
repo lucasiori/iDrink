@@ -67,7 +67,7 @@ export const Container = styled.div`
     max-width: none;
     height: 80vh;
     border: none;
-    padding: 70px 30px 30px;
+    padding: 30px;
     margin-top: auto;
 
     &[hidden] {
@@ -144,6 +144,7 @@ export const DrinkTags = styled.section`
   margin: 20px 0 0 -20px;
 
   span {
+    min-width: max-content;
     background: ${colors.primaryColor};
     border: 1.5px solid ${colors.primaryColor};
     border-radius: 30px;
